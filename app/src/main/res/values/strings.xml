@@ -4,4 +4,5 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="image_to_show_items_in_slider">Image to show items in slider</string>
+    <string name="image_of_every_category">Image of every category</string>
 </resources>
