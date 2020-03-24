@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Bella Pietra</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="image_to_show_items_in_slider">Image to show items in slider</string>
+</resources>
