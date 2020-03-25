@@ -23,11 +23,11 @@
     <fragment
         android:id="@+id/showAllFragment"
         android:name="com.bellapietra.bellapietra.ui.showAll.ShowAllFragment"
-        android:label="show_all_fragment"
+        android:label=""
         tools:layout="@layout/show_all_fragment" >
         <argument
-            android:name="catid"
-            app:argType="string"
+            android:name="category"
+            app:argType="com.bellapietra.bellapietra.network.CategoryItem"
             app:nullable="true" />
         <argument
             android:name="single_item"

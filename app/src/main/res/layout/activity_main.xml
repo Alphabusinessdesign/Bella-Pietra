@@ -17,6 +17,7 @@
             android:layout_height="?attr/actionBarSize">
 
             <TextView
+                android:id="@+id/toolbar_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="serif-monospace"

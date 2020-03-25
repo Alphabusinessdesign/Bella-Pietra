@@ -10,7 +10,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-private var homeItemList:MutableList<SingleItems> = mutableListOf()
+
 class HomeViewModel : ViewModel() {
 
     //Store Category list
@@ -114,12 +114,10 @@ class HomeViewModel : ViewModel() {
         _navigateToShowAllFragment.value = null
     }
 
-    fun addItemsToHomeList(item:SingleItems){
-        homeItemList.add(item)
+    fun addItemsToHomeList(homeItemList:MutableList<SingleItems>){
         Timber.e("Home item list size is ${homeItemList.size}")
         _homeItemListLiveData.value = homeItemList
     }
-
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bellapietra.bellapietra.R
 import com.bellapietra.bellapietra.databinding.FragmentHomeBinding
+import com.bellapietra.bellapietra.network.CategoryItem
 import com.bellapietra.bellapietra.network.SingleItems
 import timber.log.Timber
 
@@ -20,6 +21,8 @@ class HomeFragment : Fragment() {
     private lateinit var sliderAdapter: HomeSliderAdapter
     private lateinit var homeAdapter: HomeAdapter
     private lateinit var homeBinding:FragmentHomeBinding
+    private var homeItemList:MutableSet<SingleItems>? = mutableSetOf()
+    private lateinit var idList: MutableList<Int>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,34 +61,24 @@ class HomeFragment : Fragment() {
         homeViewModel.categoryList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 categoryAdapter.submitList(it)
-                homeViewModel.createCatIdList(it)
+                idList = createCatIdList(it)
+                for (id in idList) {
+                    Timber.e("ids are $id")
+                    homeViewModel.getItemsByCategory(id)
+                }
             } ?: let {
                 Timber.e("Category list is empty")
             }
         })
 
-        //Observe category id list
-        homeViewModel.catIdList.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                for (id in it) {
-                    Timber.e("ids are $id")
-                    homeViewModel.getItemsByCategory(id)
-                }
-            }
-        })
-
         //Observe ItemList by category
         homeViewModel.itemList.observe(viewLifecycleOwner, Observer {
-            Timber.e("Item list size ${it.size}")
             val singleItems = SingleItems(it)
-            homeViewModel.addItemsToHomeList(singleItems)
-        })
-
-        //observe home item list value
-        homeViewModel.homeItemListLiveData.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                homeAdapter = HomeAdapter(it)
+            homeItemList?.add(singleItems).let {
+                Timber.e("Items in home item list ${homeItemList?.size}")
+                homeAdapter = HomeAdapter()
                 homeBinding.homeRecycler.adapter = homeAdapter
+                homeAdapter.setHomeItemList(homeItemList!!.toMutableList())
             }
         })
 
@@ -93,10 +86,27 @@ class HomeFragment : Fragment() {
         homeViewModel.navigateToShowAllFragment.observe(viewLifecycleOwner, Observer {
             it?.let {
                 findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToShowAllFragment(
-                    it.catid,null,getString(R.string.category)
+                    it,null,getString(R.string.category)
                 ))
                 homeViewModel.doneNavigating()
             }
         })
+    }
+
+    //Create Id list
+    private fun createCatIdList(catList:List<CategoryItem>):MutableList<Int>{
+        val idList = mutableListOf<Int>()
+        for (item in catList){
+            idList.add(item.catid!!.toInt())
+        }
+        return idList
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Timber.e("on pause")
+        homeItemList?.clear()
+        idList.clear()
+        Timber.e("Item in home item list ${homeItemList?.size}")
     }
 }

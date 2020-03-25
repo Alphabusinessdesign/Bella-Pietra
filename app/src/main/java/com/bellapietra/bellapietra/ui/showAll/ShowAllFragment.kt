@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bellapietra.bellapietra.MainActivity
 
 import com.bellapietra.bellapietra.R
 import com.bellapietra.bellapietra.databinding.ShowAllFragmentBinding
@@ -33,6 +36,10 @@ class ShowAllFragment : Fragment() {
     ): View? {
         showAllBinding = ShowAllFragmentBinding.inflate(inflater,container,false)
 
+        //Setting up recyclerView
+        showAllAdapter = ShowAllAdapter()
+        showAllBinding.showAllRecycler.adapter = showAllAdapter
+
         return showAllBinding.root
     }
 
@@ -44,22 +51,25 @@ class ShowAllFragment : Fragment() {
 
         //Getting arguments from the sender
         val arguments = ShowAllFragmentArgs.fromBundle(getArguments()!!)
+        val activity = activity as MainActivity
         sender = arguments.sender
         if (sender == getString(R.string.category)){
-            catid = arguments.catid!!
-            Toast.makeText(context,catid,Toast.LENGTH_SHORT).show()
+            catid = arguments.category?.catid!!
+            viewModel.getItemsByCategory(catid.toInt())
+            activity.setToolbarTv(arguments.category?.catname)
         }else{
             singleItems = arguments.singleItem!!
-
-            //Setting up recyclerView
-            showAllAdapter = ShowAllAdapter()
-            showAllBinding.showAllRecycler.adapter = showAllAdapter
             showAllAdapter.submitList(singleItems.singleItemList)
-
             //Setting up the Heading
-            showAllBinding.showAllTv.text = singleItems.singleItemList?.get(0)?.catname
+            activity.setToolbarTv(singleItems.singleItemList?.get(0)?.catname)
         }
 
+        //Observe items by category
+        viewModel.itemList.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                showAllAdapter.submitList(it)
+            }
+        })
     }
 
 }

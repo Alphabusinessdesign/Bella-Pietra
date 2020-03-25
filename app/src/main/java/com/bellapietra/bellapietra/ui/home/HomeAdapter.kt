@@ -11,7 +11,8 @@ import com.bellapietra.bellapietra.network.Item
 import com.bellapietra.bellapietra.network.SingleItems
 import com.google.android.material.button.MaterialButton
 
-class HomeAdapter(private val homeItemList: MutableList<SingleItems>) :
+private var homeItemList: MutableList<SingleItems> = mutableListOf()
+class HomeAdapter() :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     class HomeViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -54,5 +55,13 @@ class HomeAdapter(private val homeItemList: MutableList<SingleItems>) :
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val item = homeItemList[position]
         holder.bind(item)
+    }
+
+    fun setHomeItemList(list: MutableList<SingleItems>){
+        if(list.isNotEmpty()){
+            homeItemList.clear()
+            homeItemList.addAll(list)
+            notifyDataSetChanged()
+        }
     }
 }
