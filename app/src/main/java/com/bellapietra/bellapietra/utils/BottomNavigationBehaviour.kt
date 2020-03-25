@@ -1,12 +1,10 @@
-package com.bellapietra.bellapietra
+package com.bellapietra.bellapietra.utils
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
-import java.lang.Double.max
-import java.util.jar.Attributes
 import kotlin.math.max
 import kotlin.math.min
 

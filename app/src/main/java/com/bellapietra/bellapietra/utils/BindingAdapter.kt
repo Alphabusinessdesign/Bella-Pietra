@@ -6,6 +6,7 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import kotlin.random.Random
 
 @BindingAdapter("categoryName")
 fun setCategoryName(tv: TextView, name: String?) {
@@ -20,8 +21,7 @@ fun setCategoryImage(iv: ImageView, imgUrl: String?) {
         val imageUri = imgUrl.toUri().buildUpon().scheme("https").build()
         Glide.with(iv.context)
             .load(imageUri)
-            .apply(RequestOptions
-                    .overrideOf(200, 600)
+            .apply(RequestOptions()
                     .circleCrop())
             .into(iv)
     }
@@ -29,6 +29,18 @@ fun setCategoryImage(iv: ImageView, imgUrl: String?) {
 
 @BindingAdapter("homeItemImage")
 fun setHomeItemImage(iv:ImageView,imgUrl: String?){
+    imgUrl?.let {
+        val imageUri = imgUrl.toUri().buildUpon().scheme("https").build()
+        Glide.with(iv.context)
+            .load(imageUri)
+            .apply(RequestOptions()
+                .centerCrop())
+            .into(iv)
+    }
+}
+
+@BindingAdapter("itemImage")
+fun setItemImage(iv:ImageView, imgUrl: String?){
     imgUrl?.let {
         val imageUri = imgUrl.toUri().buildUpon().scheme("https").build()
         Glide.with(iv.context)

@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/showAllFragment"
-        android:name="com.bellapietra.bellapietra.ui.home.ShowAllFragment"
+        android:name="com.bellapietra.bellapietra.ui.showAll.ShowAllFragment"
         android:label="show_all_fragment"
         tools:layout="@layout/show_all_fragment" >
         <argument
