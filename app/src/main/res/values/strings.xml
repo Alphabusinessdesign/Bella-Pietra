@@ -5,4 +5,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="image_to_show_items_in_slider">Image to show items in slider</string>
     <string name="image_of_every_category">Image of every category</string>
+    <string name="images_of_items_per_category">Images of items per category</string>
+    <string name="show_all">Show All</string>
 </resources>

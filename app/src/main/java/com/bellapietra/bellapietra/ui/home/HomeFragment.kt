@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bellapietra.bellapietra.databinding.FragmentHomeBinding
 import com.bellapietra.bellapietra.network.SingleItems
 import timber.log.Timber
@@ -30,7 +31,10 @@ class HomeFragment : Fragment() {
         val homeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
         //Setting up category recyclerView
-        categoryAdapter = CategoryAdapter()
+        categoryAdapter = CategoryAdapter(CategoryClickListener {
+            homeViewModel.navigateToShowAllFrag(it)
+        })
+
         homeBinding.categoryRecycler.adapter = categoryAdapter
 
         //Setting up slider
@@ -73,6 +77,16 @@ class HomeFragment : Fragment() {
             it?.let {
                 homeAdapter = HomeAdapter(it)
                 homeBinding.homeRecycler.adapter = homeAdapter
+            }
+        })
+
+        //Observe when to navigate ShowAllFragment
+        homeViewModel.navigateToShowAllFragment.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToShowAllFragment(
+                    it.catid,null,"Category"
+                ))
+                homeViewModel.doneNavigating()
             }
         })
         return homeBinding.root

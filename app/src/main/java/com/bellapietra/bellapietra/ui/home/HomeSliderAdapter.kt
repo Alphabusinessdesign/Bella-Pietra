@@ -42,8 +42,7 @@ class HomeSliderAdapter(private val imageList: List<Item>) :
             val uri = url?.toUri()?.buildUpon()?.scheme("https")?.build()
             Glide.with(viewHolder.itemView.context)
                 .apply {
-                    RequestOptions
-                        .overrideOf(600, 200)
+                    RequestOptions()
                         .centerCrop()
                 }
                 .load(uri)

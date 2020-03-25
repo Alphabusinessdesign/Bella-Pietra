@@ -38,6 +38,10 @@ class HomeViewModel : ViewModel() {
     val homeItemListLiveData:LiveData<MutableList<SingleItems>>
     get() = _homeItemListLiveData
 
+    private var _navigateToShowAllFragment = MutableLiveData<CategoryItem>()
+    val navigateToShowAllFragment:LiveData<CategoryItem>
+    get() = _navigateToShowAllFragment
+
     //Initialing Coroutines job
     private val viewModelJob = Job()
 
@@ -47,6 +51,7 @@ class HomeViewModel : ViewModel() {
     init {
         getCategoryList()
         getAllItems()
+        _navigateToShowAllFragment.value = null
     }
 
     //get Category list from network
@@ -98,6 +103,15 @@ class HomeViewModel : ViewModel() {
             idList.add(item.catid!!.toInt())
         }
         _catIdList.value = idList
+    }
+
+    //navigate to Show all fragment
+    fun navigateToShowAllFrag(categoryItem: CategoryItem){
+        _navigateToShowAllFragment.value = categoryItem
+    }
+
+    fun doneNavigating(){
+        _navigateToShowAllFragment.value = null
     }
 
     fun addItemsToHomeList(item:SingleItems){

@@ -1,12 +1,15 @@
 package com.bellapietra.bellapietra.network
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
 data class Slider (
     @Json(name = "posts")
     var itemList: List<Item>?
 )
 
+@Parcelize
 data class Item (
     @Json(name = "catid")
     var catid: String?,
@@ -22,4 +25,4 @@ data class Item (
 
     @Json(name = "description")
     var description: String?
-)
+):Parcelable

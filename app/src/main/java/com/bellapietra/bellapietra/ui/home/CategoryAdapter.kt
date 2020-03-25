@@ -7,15 +7,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bellapietra.bellapietra.databinding.CategoryListItemBinding
 import com.bellapietra.bellapietra.network.CategoryItem
-import timber.log.Timber
 
-class CategoryAdapter:ListAdapter<CategoryItem,CategoryAdapter.CategoryViewHolder>(CategoryDiffUtilCallBack()) {
+class CategoryAdapter(private val clickListener: CategoryClickListener):
+    ListAdapter<CategoryItem, CategoryAdapter.CategoryViewHolder>(CategoryDiffUtilCallBack()) {
 
-    class CategoryViewHolder(val binding: CategoryListItemBinding) :
+    class CategoryViewHolder(private val binding: CategoryListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: CategoryItem) {
+        fun bind(item: CategoryItem, clickListener: CategoryClickListener) {
             binding.categoryItem = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -37,11 +38,14 @@ class CategoryAdapter:ListAdapter<CategoryItem,CategoryAdapter.CategoryViewHolde
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item,clickListener)
     }
 }
+class CategoryClickListener(val clickListener:(categoryItem:CategoryItem)->Unit){
+    fun onCategoryClick(categoryItem: CategoryItem) = clickListener(categoryItem)
+}
 
-class CategoryDiffUtilCallBack:DiffUtil.ItemCallback<CategoryItem>(){
+class CategoryDiffUtilCallBack : DiffUtil.ItemCallback<CategoryItem>() {
     override fun areItemsTheSame(oldItem: CategoryItem, newItem: CategoryItem): Boolean {
         return oldItem === newItem
     }

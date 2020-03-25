@@ -9,12 +9,33 @@
         android:id="@+id/navigation_home"
         android:name="com.bellapietra.bellapietra.ui.home.HomeFragment"
         android:label=" "
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_showAllFragment"
+            app:destination="@id/showAllFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.bellapietra.bellapietra.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/showAllFragment"
+        android:name="com.bellapietra.bellapietra.ui.home.ShowAllFragment"
+        android:label="show_all_fragment"
+        tools:layout="@layout/show_all_fragment" >
+        <argument
+            android:name="catid"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="single_item"
+            app:argType="com.bellapietra.bellapietra.network.SingleItems"
+            app:nullable="true" />
+        <argument
+            android:name="sender"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

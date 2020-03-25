@@ -26,3 +26,15 @@ fun setCategoryImage(iv: ImageView, imgUrl: String?) {
             .into(iv)
     }
 }
+
+@BindingAdapter("homeItemImage")
+fun setHomeItemImage(iv:ImageView,imgUrl: String?){
+    imgUrl?.let {
+        val imageUri = imgUrl.toUri().buildUpon().scheme("https").build()
+        Glide.with(iv.context)
+            .load(imageUri)
+            .apply(RequestOptions()
+                .centerCrop())
+            .into(iv)
+    }
+}
