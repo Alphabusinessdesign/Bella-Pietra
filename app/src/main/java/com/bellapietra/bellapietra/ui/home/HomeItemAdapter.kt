@@ -2,6 +2,7 @@ package com.bellapietra.bellapietra.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,9 @@ class HomeItemAdapter:ListAdapter<Item, HomeItemAdapter.HomeItemViewHolder>(Home
         fun bind(item: Item) {
             binding.item = item
             binding.executePendingBindings()
+            binding.homeItemCard.setOnClickListener{
+                it.findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToItemDetailsFragment("Home",item))
+            }
         }
 
         companion object {

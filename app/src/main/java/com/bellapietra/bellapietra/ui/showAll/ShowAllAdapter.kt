@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bellapietra.bellapietra.databinding.ShowAllListItemBinding
 import com.bellapietra.bellapietra.network.Item
 
-class ShowAllAdapter:ListAdapter<Item,ShowAllAdapter.ShowAllViewHolder>(ShowAllDiffUtilCallBack()){
+class ShowAllAdapter(val clickListener: ShowAllClickListener):ListAdapter<Item,ShowAllAdapter.ShowAllViewHolder>(ShowAllDiffUtilCallBack()){
 
     class ShowAllViewHolder(private val binding: ShowAllListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Item) {
+        fun bind(item: Item, clickListener: ShowAllClickListener) {
             binding.item = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -36,8 +37,12 @@ class ShowAllAdapter:ListAdapter<Item,ShowAllAdapter.ShowAllViewHolder>(ShowAllD
 
     override fun onBindViewHolder(holder: ShowAllViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item,clickListener)
     }
+}
+
+class ShowAllClickListener(val clickListener:(item:Item)->Unit){
+    fun onShowItemClick(item: Item) = clickListener(item)
 }
 
 class ShowAllDiffUtilCallBack:DiffUtil.ItemCallback<Item>(){

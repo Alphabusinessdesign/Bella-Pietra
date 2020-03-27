@@ -22,7 +22,7 @@
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:background="@drawable/dark_shadow"
+        android:background="@drawable/curved_corner_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

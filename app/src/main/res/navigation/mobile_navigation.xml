@@ -13,13 +13,20 @@
         <action
             android:id="@+id/action_navigation_home_to_showAllFragment"
             app:destination="@id/showAllFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_itemDetailsFragment"
+            app:destination="@id/itemDetailsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.bellapietra.bellapietra.ui.dashboard.DashboardFragment"
+        android:name="com.bellapietra.bellapietra.ui.newArrival.NewArrivalFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_newest_arrival" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_itemDetailsFragment"
+            app:destination="@id/itemDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/showAllFragment"
         android:name="com.bellapietra.bellapietra.ui.showAll.ShowAllFragment"
@@ -36,6 +43,21 @@
         <argument
             android:name="sender"
             app:argType="string" />
+        <action
+            android:id="@+id/action_showAllFragment_to_itemDetailsFragment"
+            app:destination="@id/itemDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemDetailsFragment"
+        android:name="com.bellapietra.bellapietra.ui.itemDetails.ItemDetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="sender"
+            app:argType="string" />
+        <argument
+            android:name="item"
+            app:argType="com.bellapietra.bellapietra.network.Item" />
     </fragment>
 
 </navigation>
