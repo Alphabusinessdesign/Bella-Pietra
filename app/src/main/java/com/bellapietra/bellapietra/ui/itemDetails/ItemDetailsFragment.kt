@@ -1,5 +1,7 @@
 package com.bellapietra.bellapietra.ui.itemDetails
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -59,6 +61,7 @@ class ItemDetailsFragment : Fragment(), View.OnClickListener {
 
         //Set on click listener to interested button
         detailsBinding.interestedButton.setOnClickListener(this)
+        detailsBinding.callNowFab.setOnClickListener(this)
         return detailsBinding.root
     }
 
@@ -67,6 +70,11 @@ class ItemDetailsFragment : Fragment(), View.OnClickListener {
             detailsBinding.interestedButton -> {
                 val submitDetailBottomSheet = SubmitDetailsFragment()
                 submitDetailBottomSheet.show(activity!!.supportFragmentManager,submitDetailBottomSheet.tag)
+            }
+            detailsBinding.callNowFab->{
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.setData(Uri.parse("tel:+14508126885"))
+                startActivity(intent)
             }
         }
     }

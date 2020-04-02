@@ -19,15 +19,6 @@
         tools:src="@drawable/ic_dashboard_black_24dp" />
 
     <View
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:background="@drawable/curved_corner_back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@drawable/light_shadow"

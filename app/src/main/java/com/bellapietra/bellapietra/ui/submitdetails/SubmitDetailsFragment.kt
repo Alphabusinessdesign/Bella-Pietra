@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
@@ -84,8 +85,18 @@ class SubmitDetailsFragment : BottomSheetDialogFragment(), View.OnClickListener 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        //Initializing ViewModel class
         viewModel = ViewModelProvider(this).get(SubmitDetailsViewModel::class.java)
 
+        //Observe the viewModel class
+        viewModel.detailsSubmitted.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                Toast.makeText(context,it,Toast.LENGTH_SHORT).show()
+                viewModel.disMissDialog()
+                dismiss()
+            }
+        })
     }
 
     override fun onClick(v: View?) {
@@ -106,12 +117,19 @@ class SubmitDetailsFragment : BottomSheetDialogFragment(), View.OnClickListener 
             phone.isEmpty()->submitDetailsBinding.phoneTextInputLayout.error = getString(R.string.enter_phone_number)
             email.isEmpty()->submitDetailsBinding.emailTextInputLayout.error = getString(R.string.enter_email_address)
             !validateEmail(email)->submitDetailsBinding.emailTextInputLayout.error = getString(R.string.enter_valid_email)
-            else->dismiss()
+            else->{
+                submitDetails(name, email, phone)
+            }
         }
     }
 
     //Validate email
     private fun validateEmail(emailId: String):Boolean{
         return Patterns.EMAIL_ADDRESS.matcher(emailId).matches()
+    }
+
+    //Submit details
+    private fun submitDetails(name: String,email:String, phone: String){
+        viewModel.submitDetails(name, email, phone)
     }
 }
