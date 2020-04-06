@@ -21,6 +21,10 @@ class NewArrivalViewModel : ViewModel() {
     val itemList: LiveData<List<Item>>
         get() = _itemList
 
+    private var _navigateToItemDetailsFrag = MutableLiveData<Item>()
+    val navigateToItemDetailsFrag:LiveData<Item>
+    get() = _navigateToItemDetailsFrag
+
     init {
         getAllItems()
     }
@@ -44,6 +48,14 @@ class NewArrivalViewModel : ViewModel() {
                 Timber.e("Failed to get newest arrival items")
             }
         }
+    }
+
+    fun onNewArrivalItemClick(item: Item){
+        _navigateToItemDetailsFrag.value = item
+    }
+
+    fun doneNavigating(){
+        _navigateToItemDetailsFrag.value = null
     }
 
     override fun onCleared() {

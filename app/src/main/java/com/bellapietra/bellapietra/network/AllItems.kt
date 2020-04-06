@@ -4,7 +4,7 @@ import android.os.Parcelable
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
-data class Slider (
+data class AllItems (
     @Json(name = "posts")
     var itemList: List<Item>?
 )

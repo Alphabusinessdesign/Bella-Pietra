@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bellapietra.bellapietra.databinding.SimilarListItemBinding
 import com.bellapietra.bellapietra.network.Item
 
-class SimilarItemAdapter:ListAdapter<Item,SimilarItemAdapter.SimilarItemViewHolder>(SimilarItemDiffUtilCallBack()) {
+class SimilarItemAdapter(val clickListener: SimilarItemClickListener):ListAdapter<Item,SimilarItemAdapter.SimilarItemViewHolder>(SimilarItemDiffUtilCallBack()) {
 
     class SimilarItemViewHolder(val binding: SimilarListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Item) {
+        fun bind(item: Item,clickListener: SimilarItemClickListener) {
             binding.item = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -36,8 +37,12 @@ class SimilarItemAdapter:ListAdapter<Item,SimilarItemAdapter.SimilarItemViewHold
 
     override fun onBindViewHolder(holder: SimilarItemViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item,clickListener)
     }
+}
+
+class SimilarItemClickListener(val clickListener:(item: Item)->Unit){
+    fun onSimilarItemClick(item: Item) = clickListener(item)
 }
 
 class SimilarItemDiffUtilCallBack : DiffUtil.ItemCallback<Item>() {

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bellapietra.bellapietra.R
 import com.bellapietra.bellapietra.databinding.FragmentHomeBinding
 import com.bellapietra.bellapietra.network.CategoryItem
@@ -22,7 +23,7 @@ class HomeFragment : Fragment() {
     private lateinit var homeAdapter: HomeAdapter
     private lateinit var homeBinding:FragmentHomeBinding
     private var homeItemList:MutableSet<SingleItems>? = mutableSetOf()
-    private lateinit var idList: MutableList<Int>
+    private var idList: MutableList<Int> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -11,11 +11,11 @@ data class Category(
 )
 
 @Parcelize
-data class CategoryItem (
+data class CategoryItem(
     @Json(name = "catid")
     var catid: String?,
     @Json(name = "catname")
     var catname: String?,
     @Json(name = "catimage")
-    var catimgUrl:String
-):Parcelable
+    var catimgUrl: String
+) : Parcelable

@@ -23,15 +23,19 @@ class HomeAdapter() :
 
         fun bind(item: SingleItems) {
             val itemList: List<Item> = item.singleItemList!!.toList()
-            homeItemTitle.text = itemList[0].catname
-            val homeItemAdapter = HomeItemAdapter()
-            homeItemRecycler.adapter = homeItemAdapter
-            homeItemAdapter.submitList(itemList)
+            if (itemList.isNotEmpty()) {
+                homeItemTitle.text = itemList[0].catname
+                val homeItemAdapter = HomeItemAdapter()
+                homeItemRecycler.adapter = homeItemAdapter
+                homeItemAdapter.submitList(itemList)
 
-            showAllButton.setOnClickListener {
-                it.findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToShowAllFragment(
-                    null,item,"HomeFragment"
-                ))
+                showAllButton.setOnClickListener {
+                    it.findNavController().navigate(
+                        HomeFragmentDirections.actionNavigationHomeToShowAllFragment(
+                            null, item, "HomeFragment"
+                        )
+                    )
+                }
             }
         }
 

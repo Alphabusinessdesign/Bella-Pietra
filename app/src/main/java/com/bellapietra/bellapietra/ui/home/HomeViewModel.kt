@@ -10,8 +10,12 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-
+enum class apiStatus{LOADING, ERROR, DONE}
 class HomeViewModel : ViewModel() {
+
+    private var _apiStatus = MutableLiveData<apiStatus>()
+    val apiStatus:LiveData<apiStatus>
+    get() = _apiStatus
 
     //Store Category list
     private var _categoryList = MutableLiveData<List<CategoryItem>>()
@@ -87,22 +91,15 @@ class HomeViewModel : ViewModel() {
         uiScope.launch {
             val getItemsByCategoryDeferred = BellaApi.retrofitService.getItemByCategoryAsync(catId)
             try {
+                _apiStatus.value = com.bellapietra.bellapietra.ui.home.apiStatus.LOADING
                 val result = getItemsByCategoryDeferred.await()
                 _itemLists.value = result.singleItemList
+                _apiStatus.value = com.bellapietra.bellapietra.ui.home.apiStatus.DONE
             }catch (e:Exception){
                 Timber.e("Error getting item by category ${e.message}")
+                _apiStatus.value = com.bellapietra.bellapietra.ui.home.apiStatus.ERROR
             }
         }
-    }
-
-
-    //Create Id list
-    fun createCatIdList(catList:List<CategoryItem>){
-        val idList = mutableListOf<Int>()
-        for (item in catList){
-            idList.add(item.catid!!.toInt())
-        }
-        _catIdList.value = idList
     }
 
     //navigate to Show all fragment

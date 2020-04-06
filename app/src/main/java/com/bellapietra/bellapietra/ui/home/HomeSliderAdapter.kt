@@ -10,6 +10,7 @@ import com.bellapietra.bellapietra.network.Item
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.smarteist.autoimageslider.SliderViewAdapter
+import com.squareup.picasso.Picasso
 import timber.log.Timber
 
 class HomeSliderAdapter(private val imageList: List<Item>) :
@@ -38,15 +39,14 @@ class HomeSliderAdapter(private val imageList: List<Item>) :
 
     override fun onBindViewHolder(viewHolder: SliderViewHolder?, position: Int) {
         viewHolder?.let {
-            val url = imageList.get(position).imageUrl
-            val uri = url?.toUri()?.buildUpon()?.scheme("https")?.build()
-            Glide.with(viewHolder.itemView.context)
-                .apply {
-                    RequestOptions()
-                        .centerCrop()
-                }
-                .load(uri)
-                .into(viewHolder.sliderIv)
+            if (imageList.isNotEmpty()) {
+                val url = imageList.get(position).imageUrl
+                val uri = url?.toUri()?.buildUpon()?.scheme("https")?.build()
+                Picasso.get().load(uri)
+                    .centerCrop()
+                    .fit()
+                    .into(viewHolder.sliderIv)
+            }
         }
     }
 }

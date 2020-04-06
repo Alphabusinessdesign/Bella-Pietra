@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "315223071952",
+    "firebase_url": "https://bella-pietra.firebaseio.com",
+    "project_id": "bella-pietra",
+    "storage_bucket": "bella-pietra.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315223071952:android:ee3aba3d306ab14beed2d5",
+        "android_client_info": {
+          "package_name": "com.bellapietra.bellapietra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315223071952-tgc02mb12oljhfp1qqn4h57k5lo6ndu5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSTO2Ct9uVOSinxkzxSXpAJzAPiz64UQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315223071952-tgc02mb12oljhfp1qqn4h57k5lo6ndu5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

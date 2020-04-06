@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/slider_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:background="@android:color/white"
         android:contentDescription="@string/image_to_show_items_in_slider"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,7 +20,7 @@
 
     <View
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:background="@drawable/light_shadow"
         app:layout_constraintBottom_toBottomOf="@+id/slider_image"
         app:layout_constraintEnd_toEndOf="parent"

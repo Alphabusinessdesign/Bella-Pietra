@@ -8,6 +8,9 @@
         <variable
             name="item"
             type="com.bellapietra.bellapietra.network.Item" />
+        <variable
+            name="clickListener"
+            type="com.bellapietra.bellapietra.ui.itemDetails.SimilarItemClickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -15,6 +18,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         app:cardElevation="6dp"
+        android:onClick="@{()->clickListener.onSimilarItemClick(item)}"
         app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout

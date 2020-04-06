@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -42,6 +44,11 @@ android {
     androidExtensions {
         experimental = true
     }
+
+    configurations.all() {
+        resolutionStrategy.force "org.antlr:antlr4-runtime:4.5.3"
+        resolutionStrategy.force "org.antlr:antlr4-tool:4.5.3"
+    }
 }
 
 dependencies {
@@ -67,7 +74,7 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
     // Coroutines for getting off the UI thread
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_kotlin_coroutines"
@@ -87,6 +94,16 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$version_timber"
 
     // Room database
-    implementation "androidx.room:room-runtime:$version_room"
-    kapt "androidx.room:room-compiler:$version_room"
+//    implementation "androidx.room:room-runtime:$version_room"
+//    kapt "androidx.room:room-compiler:$version_room"
+
+    //FireBase Analytics
+    implementation 'com.google.firebase:firebase-analytics:17.3.0'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation "com.airbnb.android:lottie:3.4.0"
+
+
 }

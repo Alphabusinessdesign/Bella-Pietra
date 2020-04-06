@@ -42,7 +42,10 @@ class ItemDetailsFragment : Fragment(), View.OnClickListener {
         detailsBinding.item = item
 
         //Setting up the recyclerView with Adapter
-        similarAdapter = SimilarItemAdapter()
+        similarAdapter = SimilarItemAdapter(SimilarItemClickListener {
+            detailsBinding.item = it
+        })
+        
         detailsBinding.similarRecycler.adapter = similarAdapter
 
         //Getting similar items by category

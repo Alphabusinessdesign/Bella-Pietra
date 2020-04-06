@@ -4,33 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="categoryItem"
             type="com.bellapietra.bellapietra.network.CategoryItem" />
+
         <variable
             name="clickListener"
             type="com.bellapietra.bellapietra.ui.home.CategoryClickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         app:cardElevation="6dp"
-        android:onClick="@{()->clickListener.onCategoryClick(categoryItem)}"
-        app:cardUseCompatPadding="true">
+        android:layout_margin="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->clickListener.onCategoryClick(categoryItem)}">
 
             <ImageView
                 android:id="@+id/category_item_iv"
                 categoryImage="@{categoryItem.catimgUrl}"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_width="140dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
                 android:contentDescription="@string/image_of_every_category"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -42,24 +46,13 @@
                 categoryName="@{categoryItem.catname}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/roboto_slab"
                 android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/category_item_iv"
                 tools:text="@string/app_name" />
-
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintTop_toBottomOf="@+id/category_item_iv" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
